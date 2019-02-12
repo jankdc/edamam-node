@@ -1,0 +1,36 @@
+{
+  "name": "edamam-node",
+  "version": "1.0.0",
+  "author": "Jan Karlo Dela Cruz",
+  "description": "Edamam API for Node.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "keywords": [
+    "edamam"
+  ],
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "got": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/got": "^9.4.0",
+    "@types/jest": "^24.0.1",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  },
+  "scripts": {
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest",
+    "build": "tsc",
+    "prepare": "npm run lint && npm run build"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}

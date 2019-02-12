@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EdamamClient searchRecipesById requests API correctly (no options) 1`] = `"https://some-url.com/search?r=some-r"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (calories) 1`] = `"https://some-url.com/search?calories=some-calories&app_id=some-id&app_key=some-key&q=some-query&"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (diet) 1`] = `"https://some-url.com/search?diet=balanced&app_id=some-id&app_key=some-key&q=some-query&"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (excluded) 1`] = `"https://some-url.com/search?excluded=some-excluded&app_id=some-id&app_key=some-key&q=some-query&"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (from, to) 1`] = `"https://some-url.com/search?from=1234&to=4321&app_id=some-id&app_key=some-key&q=some-query&"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (health) 1`] = `"https://some-url.com/search?health=alcohol-free&health=dairy-free&app_id=some-id&app_key=some-key&q=some-query&"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (ingr) 1`] = `"https://some-url.com/search?ingr=1234&app_id=some-id&app_key=some-key&q=some-query&"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (no options) 1`] = `"https://some-url.com/search?q=some-query"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (nutrients) 1`] = `"https://some-url.com/search?app_id=some-id&app_key=some-key&q=some-query&nutrients%5BCA%5D%3D1341%2B"`;
+
+exports[`EdamamClient searchRecipesByQuery requests correctly (time) 1`] = `"https://some-url.com/search?time=123%2B&app_id=some-id&app_key=some-key&q=some-query&"`;

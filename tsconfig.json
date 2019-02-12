@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "declaration": true,
+    "outDir": "lib",
+    "target": "es6",
+    "strict": true,
+    "module": "commonjs"
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
