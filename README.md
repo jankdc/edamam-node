@@ -9,7 +9,10 @@ npm install edamam-node
 ```js
 const { EdamamClient } = require("edamam-node");
 
-const client = new EdamamClient("your-app-id", "your-app_key");
+const client = new EdamamClient({
+  appId: "your-app-id",
+  appKey: "your-app-key"
+});
 const search = await client.searchRecipesByQuery("your-query");
 ```
 
