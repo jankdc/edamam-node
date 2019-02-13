@@ -1,6 +1,6 @@
 {
   "name": "edamam-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jan Karlo Dela Cruz",
   "description": "Edamam API for Node.js",
   "main": "lib/index.js",
