@@ -1,5 +1,4 @@
 import { get } from "got";
-import { escape, stringify } from "querystring";
 import { SearchHits, SearchOptions } from "./types";
 
 export interface EdamamParams {
@@ -29,21 +28,21 @@ export class EdamamClient {
 
   private async searchRecipes(key: string, value: string, options?: SearchOptions) {
     if (!options) {
-      const url = `${this.baseUrl}/search?${stringify({[key]: value})}`;
+      const url = encodeURI(`${this.baseUrl}/search?${key}=${value}`);
       const { body } = await get(url, {json: true});
       return body as SearchHits;
     }
 
     const { nutrients, excluded, ...rest } = options;
 
-    const optionsParams = stringify(sanitiseObject({
+    const optionsParams = buildObjString(sanitiseObject({
       ...rest,
       app_id: this.appId,
       app_key: this.appKey,
       [key]: value,
     }));
 
-    const nutrientsParams = buildQueryString("nutrients",
+    const nutrientsParams = buildMapString("nutrients",
       nutrients || new Map(),
     );
 
@@ -52,10 +51,10 @@ export class EdamamClient {
     );
 
     const queryParams = [optionsParams, nutrientsParams, excludedParams]
-      .filter((item) => item !== undefined)
+      .filter((item) => item)
       .join("&");
 
-    const response = await get(`${this.baseUrl}/search?${queryParams}`, {
+    const response = await get(encodeURI(`${this.baseUrl}/search?${queryParams}`), {
       json: true,
     });
     return response.body as SearchHits;
@@ -73,22 +72,20 @@ function sanitiseObject(obj: any) {
   return clone;
 }
 
-function buildQueryString<K, V>(param: string, map: Map<K, V>) {
-  if (!map.size)  {
-    return;
-  }
-
+function buildMapString<K, V>(param: string, map: Map<K, V>) {
   return [...map.entries()]
-    .map(([key, val]) => escape(`${param}[${key}]=${val}`))
+    .map(([key, val]) => `${param}[${key}]=${val}`)
     .join("&");
 }
 
 function buildArrayString<T>(param: string, arr: T[]) {
-  if (!arr.length) {
-    return;
-  }
-
   return arr
-    .map((val) => escape(`${param}=${val}`))
+    .map((val) => `${param}=${val}`)
+    .join("&");
+}
+
+function buildObjString(obj: object) {
+  return Object.entries(obj)
+    .map(([key, val]) => `${key}=${val}`)
     .join("&");
 }
