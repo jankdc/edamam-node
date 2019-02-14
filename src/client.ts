@@ -34,7 +34,7 @@ export class EdamamClient {
       return body as SearchHits;
     }
 
-    const { nutrients, ...rest } = options;
+    const { nutrients, excluded, ...rest } = options;
 
     const optionsParams = stringify(sanitiseObject({
       ...rest,
@@ -47,7 +47,14 @@ export class EdamamClient {
       nutrients || new Map(),
     );
 
-    const queryParams = [optionsParams, nutrientsParams].join("&");
+    const excludedParams = buildArrayString("excluded",
+      excluded || [],
+    );
+
+    const queryParams = [optionsParams, nutrientsParams, excludedParams]
+      .filter((item) => item !== undefined)
+      .join("&");
+
     const response = await get(`${this.baseUrl}/search?${queryParams}`, {
       json: true,
     });
@@ -73,5 +80,15 @@ function buildQueryString<K, V>(param: string, map: Map<K, V>) {
 
   return [...map.entries()]
     .map(([key, val]) => escape(`${param}[${key}]=${val}`))
+    .join("&");
+}
+
+function buildArrayString<T>(param: string, arr: T[]) {
+  if (!arr.length) {
+    return;
+  }
+
+  return arr
+    .map((val) => escape(`${param}=${val}`))
     .join("&");
 }
