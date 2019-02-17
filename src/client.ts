@@ -27,13 +27,8 @@ export class EdamamClient {
   }
 
   private async searchRecipes(key: string, value: string, options?: SearchOptions) {
-    if (!options) {
-      const url = encodeURI(`${this.baseUrl}/search?${key}=${value}`);
-      const { body } = await get(url, {json: true});
-      return body as SearchHits;
-    }
-
-    const { nutrients, excluded, ...rest } = options;
+    const opts = options || {};
+    const { nutrients, excluded, ...rest } = opts;
 
     const optionsParams = buildObjString(sanitiseObject({
       ...rest,
